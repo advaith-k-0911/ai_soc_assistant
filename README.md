@@ -8,7 +8,6 @@
 ![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-orange?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
 
----
 
 ## Overview
 
@@ -18,7 +17,7 @@ It enables security analysts to upload log files, detect suspicious activities, 
 
 The application is built using **Python**, **Streamlit**, **Plotly**, **Groq Llama 3.3**, and **ReportLab**.
 
----
+
 
 ## Features
 
@@ -34,7 +33,6 @@ Supports:
 
 Logs are automatically normalized into a common format for analysis.
 
----
 
 ### Threat Detection Engine
 
@@ -58,7 +56,6 @@ Each alert includes:
 - Evidence
 - Recommended Remediation
 
----
 
 ### AI Incident Investigation
 
@@ -73,7 +70,6 @@ The AI analyst can:
 
 If no API key is available, the application automatically switches to an offline heuristic engine.
 
----
 
 ### AI Log Chat (RAG)
 
@@ -86,7 +82,6 @@ Ask questions such as:
 
 The assistant answers only using uploaded log data.
 
----
 
 ### Interactive SOC Dashboard
 
@@ -99,7 +94,6 @@ Includes:
 - Top Attacking IPs
 - Alert Explorer
 
----
 
 ### Executive PDF Reports
 
@@ -111,7 +105,6 @@ Generate professional SOC reports containing:
 - Investigation Findings
 - Recommended Actions
 
----
 
 ## Tech Stack
 
@@ -139,8 +132,6 @@ Generate professional SOC reports containing:
 
 - MITRE ATT&CK
 
----
-
 ## Setup
 
 ### 1. Clone the Repository
@@ -166,7 +157,6 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
----
 
 ### 3. Install Dependencies
 
@@ -174,7 +164,6 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
----
 
 ### 4. Configure Environment Variables
 
@@ -186,7 +175,6 @@ GROQ_API_KEY=your_groq_api_key
 
 If no API key is provided, the application will automatically use its offline heuristic analysis mode.
 
----
 
 ### 5. Run the Application
 
@@ -200,7 +188,6 @@ Open your browser and navigate to:
 http://localhost:8501
 ```
 
----
 
 ## Supported Log Formats
 
@@ -212,7 +199,6 @@ The application currently supports:
 - TXT
 - LOG (Syslog)
 
----
 
 ## Requirements
 
@@ -220,8 +206,6 @@ The application currently supports:
 - Groq API Key (optional)
 - Internet connection (only required for AI features)
 ```
-
----
 
 ## Project Structure
 
@@ -248,7 +232,7 @@ ai_soc_assistant/
 └── requirements.txt
 ```
 
----
+
 
 ## Future Improvements
 
@@ -262,7 +246,6 @@ ai_soc_assistant/
 - Multi-user Authentication
 - Docker Deployment
 
----
 
 ## Author
 
@@ -278,7 +261,6 @@ https://github.com/advaith-k-0911
 **LinkedIn**  
 www.linkedin.com/in/advaith-k-21jul2006
 
----
 
 ## License
 
