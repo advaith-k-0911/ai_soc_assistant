@@ -1,0 +1,7 @@
+2026-08-08 08:10:15 [FAILED] AUTHENTICATION_FAILED user=root src=185.220.101.5 dst=10.0.0.12 port=22 SSH login failure for root: Invalid credentials provided.
+2026-08-08 08:10:30 [FAILED] AUTHENTICATION_FAILED user=admin src=185.220.101.5 dst=10.0.0.12 port=22 SSH login failure for admin: Invalid credentials provided.
+2026-08-08 08:10:45 [FAILED] AUTHENTICATION_FAILED user=administrator src=185.220.101.5 dst=10.0.0.12 port=22 SSH login failure for administrator: Invalid credentials provided.
+2026-08-08 08:11:00 [FAILED] AUTHENTICATION_FAILED user=postgres src=185.220.101.5 dst=10.0.0.12 port=22 SSH login failure for postgres: Invalid credentials provided.
+2026-08-08 08:11:15 [FAILED] AUTHENTICATION_FAILED user=user src=185.220.101.5 dst=10.0.0.12 port=22 SSH login failure for user: Invalid credentials provided.
+2026-08-08 08:11:30 [FAILED] AUTHENTICATION_FAILED user=test src=185.220.101.5 dst=10.0.0.12 port=22 SSH login failure for test: Invalid credentials provided.
+2026-08-08 08:11:45 [SUCCESS] USER_LOGIN user=admin src=185.220.101.5 dst=10.0.0.12 port=22 SSH Authentication Accepted for admin from 185.220.101.5

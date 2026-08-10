@@ -1,0 +1,32 @@
+[
+  {
+    "timestamp": "2026-08-08 10:00:00",
+    "event_type": "CLOUD_LOGIN",
+    "username": "j.smith@corp.com",
+    "src_ip": "103.15.28.1",
+    "dest_ip": "13.107.42.16",
+    "port": 443,
+    "status": "SUCCESS",
+    "message": "Single Sign-On login accepted from Tokyo, Japan"
+  },
+  {
+    "timestamp": "2026-08-08 10:12:00",
+    "event_type": "CLOUD_LOGIN",
+    "username": "j.smith@corp.com",
+    "src_ip": "198.51.100.4",
+    "dest_ip": "13.107.42.16",
+    "port": 443,
+    "status": "SUCCESS",
+    "message": "Single Sign-On login accepted from New York, USA"
+  },
+  {
+    "timestamp": "2026-08-08 10:20:00",
+    "event_type": "PORT_SCAN",
+    "username": "N/A",
+    "src_ip": "45.33.32.156",
+    "dest_ip": "10.0.0.15",
+    "port": 22,
+    "status": "REJECTED",
+    "message": "TCP Connection SYN probe to port 22 blocked by firewall."
+  }
+]
