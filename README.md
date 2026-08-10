@@ -276,7 +276,7 @@ Building intelligent security solutions using AI.
 https://github.com/advaith-k-0911
 
 **LinkedIn**  
-(Add your LinkedIn profile)
+www.linkedin.com/in/advaith-k-21jul2006
 
 ---
 
