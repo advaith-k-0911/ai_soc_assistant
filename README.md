@@ -113,16 +113,6 @@ Generate professional SOC reports containing:
 
 ---
 
-## Screenshots
-
-> Replace these placeholders with your screenshots.
-
-| Dashboard | AI Investigation |
-|-----------|------------------|
-| ![](assets/dashboard.png) | ![](assets/ai.png) |
-
----
-
 ## Tech Stack
 
 ### Frontend
@@ -151,31 +141,84 @@ Generate professional SOC reports containing:
 
 ---
 
-## Installation
+## Setup
 
-Clone the repository:
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/advaith-k-0911/ai_soc_assistant.git
 cd ai_soc_assistant
 ```
 
-Install dependencies:
+### 2. Create a Virtual Environment (Recommended)
+
+**Windows**
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+**macOS / Linux**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+---
+
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Create a `.env` file:
+---
+
+### 4. Configure Environment Variables
+
+Create a `.env` file in the project root.
 
 ```env
-GROQ_API_KEY=your_api_key_here
+GROQ_API_KEY=your_groq_api_key
 ```
 
-Run the application:
+If no API key is provided, the application will automatically use its offline heuristic analysis mode.
+
+---
+
+### 5. Run the Application
 
 ```bash
 streamlit run app.py
+```
+
+Open your browser and navigate to:
+
+```
+http://localhost:8501
+```
+
+---
+
+## Supported Log Formats
+
+The application currently supports:
+
+- CSV
+- JSON
+- JSONL
+- TXT
+- LOG (Syslog)
+
+---
+
+## Requirements
+
+- Python 3.10+
+- Groq API Key (optional)
+- Internet connection (only required for AI features)
 ```
 
 ---
