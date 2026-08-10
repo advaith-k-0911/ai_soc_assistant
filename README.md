@@ -1,56 +1,246 @@
-# Enterprise AI SOC Assistant 🛡️🤖
+# Enterprise AI SOC Assistant
 
-Production-quality **AI Security Operations Center (SOC) Assistant** built with **Python**, **Streamlit**, **Plotly**, **Groq API** (`llama-3.3-70b-versatile`), and **ReportLab**.
+> An AI-powered Security Operations Center (SOC) platform for analyzing security logs, detecting threats, and generating incident reports.
 
----
-
-## 🌟 Features & UX Highlights
-
-### 1. Clear Onboarding & Demo Mode State
-- **First Launch**: Automatically loads synthetic sample security logs with a prominent, elegant **Demo Mode** info banner (`ℹ️ DEMO MODE`).
-- **Live Analysis**: When a user uploads their own CSV, LOG, TXT, or JSON file, the system automatically transitions to **Live Analysis** (`🟢 LIVE ANALYSIS`) with a green confirmation banner.
-- **Reload Demo**: Clicking "Load Synthetic Sample Logs" from the sidebar restores the Demo Mode banner.
-
-### 2. Multi-Format Log Ingestion & Parser
-- **Formats Supported**: CSV, Syslog (`.log` / `.txt`), and JSON / JSON Lines.
-- **Normalizes** raw records into a unified schema: `timestamp`, `event_type`, `username`, `src_ip`, `dest_ip`, `port`, `status`, `message`, and `location`.
-
-### 3. 9-Vector Rule-Based Detection Engine
-Automatically correlates events and triggers structured alerts with severity levels (Critical, High, Medium, Low), confidence scores, and MITRE ATT&CK mappings:
-1. **Brute-Force Attacks**
-2. **Port Scanning**
-3. **Multiple Failed Logins**
-4. **Account Lockouts**
-5. **Privilege Escalation**
-6. **Suspicious PowerShell Activity**
-7. **Excessive Failed Authentication**
-8. **Impossible Travel Anomaly**
-9. **Anomalous Off-Hours Logins**
-
-### 4. Hero AI Incident Investigation Console
-- Powered by **Groq API** (`llama-3.3-70b-versatile`) with strict log grounding to eliminate LLM hallucinations.
-- Generates structured incident analysis reports covering Executive Summary, Evidence, Technical Reasoning, MITRE ATT&CK Alignment, and Remediation Playbooks.
-- **Offline Fallback Engine**: Ensures 100% full functionality out-of-the-box even without an API key.
-
-### 5. Grounded AI Log Q&A (RAG)
-- Chat interface allowing natural language querying over uploaded logs with RAG context retrieval.
-
-### 6. Interactive Dark Operations Dashboard
-- Matte enterprise dark styling (`#0B0F14`, `#131A23`, `#1A2430`, `#22C55E`, `#38BDF8`).
-- **Plotly Visualizations**: Incident Attack Timeline, Severity Distribution Donut, Global Threat Map, Top Attacker Source IPs.
-- Live Correlated Threat Feed & Incident Details Drawer.
-
-### 7. Automated PDF Executive Report Export
-- Compiles executive overview, incident metadata, alert findings table, MITRE matrix, and remediation checklist into a styled PDF report (`ReportLab`).
+![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web_App-red?style=for-the-badge&logo=streamlit)
+![Groq](https://img.shields.io/badge/Groq-LLM-green?style=for-the-badge)
+![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)
 
 ---
 
-## ⚡ Quick Start & Installation
+## Overview
+
+Enterprise AI SOC Assistant is a modern Security Operations Center (SOC) platform that combines rule-based threat detection with AI-assisted incident investigation.
+
+It enables security analysts to upload log files, detect suspicious activities, visualize attacks, investigate incidents using AI, and generate professional PDF reports.
+
+The application is built using **Python**, **Streamlit**, **Plotly**, **Groq Llama 3.3**, and **ReportLab**.
+
+---
+
+## Features
+
+### Multi-format Log Analysis
+
+Supports:
+
+- CSV
+- JSON
+- JSONL
+- TXT
+- LOG (Syslog)
+
+Logs are automatically normalized into a common format for analysis.
+
+---
+
+### Threat Detection Engine
+
+Detects multiple attack vectors including:
+
+- Brute Force Attacks
+- Port Scanning
+- Multiple Failed Logins
+- Account Lockouts
+- Privilege Escalation
+- Suspicious PowerShell Activity
+- Excessive Failed Authentication
+- Impossible Travel
+- Off-Hours Logins
+
+Each alert includes:
+
+- Severity
+- Confidence Score
+- MITRE ATT&CK Mapping
+- Evidence
+- Recommended Remediation
+
+---
+
+### AI Incident Investigation
+
+Powered by **Groq Llama 3.3 70B**
+
+The AI analyst can:
+
+- Explain detected attacks
+- Perform evidence-based investigations
+- Map attacks to MITRE ATT&CK
+- Recommend remediation steps
+
+If no API key is available, the application automatically switches to an offline heuristic engine.
+
+---
+
+### AI Log Chat (RAG)
+
+Ask questions such as:
+
+- Which IP generated the most attacks?
+- Show failed login attempts.
+- What happened before the brute force attack?
+- Which users were targeted?
+
+The assistant answers only using uploaded log data.
+
+---
+
+### Interactive SOC Dashboard
+
+Includes:
+
+- Security KPIs
+- Attack Timeline
+- Severity Distribution
+- Threat Map
+- Top Attacking IPs
+- Alert Explorer
+
+---
+
+### Executive PDF Reports
+
+Generate professional SOC reports containing:
+
+- Executive Summary
+- Alert Details
+- MITRE ATT&CK Mapping
+- Investigation Findings
+- Recommended Actions
+
+---
+
+## Screenshots
+
+> Replace these placeholders with your screenshots.
+
+| Dashboard | AI Investigation |
+|-----------|------------------|
+| ![](assets/dashboard.png) | ![](assets/ai.png) |
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- Streamlit
+- Plotly
+
+### Backend
+
+- Python
+- Pandas
+- NumPy
+
+### AI
+
+- Groq API
+- Llama 3.3 70B
+
+### Reporting
+
+- ReportLab
+
+### Framework
+
+- MITRE ATT&CK
+
+---
+
+## Installation
+
+Clone the repository:
 
 ```bash
-cd C:\Users\Sudha\Documents\projects\ai_soc_assistant
+git clone https://github.com/advaith-k-0911/ai_soc_assistant.git
+cd ai_soc_assistant
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
+
+Create a `.env` file:
+
+```env
+GROQ_API_KEY=your_api_key_here
+```
+
+Run the application:
+
+```bash
 streamlit run app.py
 ```
 
-The app will open automatically in your browser at `http://localhost:8501`.
+---
+
+## Project Structure
+
+```text
+ai_soc_assistant/
+│
+├── app.py
+├── analyzer.py
+├── ai.py
+├── report.py
+├── utils.py
+├── config.py
+├── state_helpers.py
+│
+├── components/
+│   ├── dashboard.py
+│   ├── ai_console.py
+│   ├── reports.py
+│   ├── settings.py
+│   └── ...
+│
+├── sample_logs/
+├── assets/
+└── requirements.txt
+```
+
+---
+
+## Future Improvements
+
+- Threat Intelligence API Integration
+- VirusTotal Integration
+- Sigma Rule Support
+- YARA Rule Support
+- IOC Enrichment
+- SIEM Connectors
+- Dark Mode Themes
+- Multi-user Authentication
+- Docker Deployment
+
+---
+
+## Author
+
+**Advaith K**
+
+Cybersecurity • AI • Machine Learning
+
+Building intelligent security solutions using AI.
+
+**GitHub**  
+https://github.com/advaith-k-0911
+
+**LinkedIn**  
+(Add your LinkedIn profile)
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+---
+
+Made with ☕, Python, and sleep deprivation by **Advaith K** <3
