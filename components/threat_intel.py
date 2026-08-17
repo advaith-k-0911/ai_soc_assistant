@@ -4,6 +4,7 @@ Threat Intelligence & MITRE ATT&CK Framework Component
 
 import pandas as pd
 import streamlit as st
+import html
 from config import MITRE_ATTACK_DB
 from utils import get_ip_location
 
@@ -26,13 +27,18 @@ def render_threat_intel(df: pd.DataFrame):
             loc = get_ip_location(lookup_ip)
             ip_logs = df[df["src_ip"] == lookup_ip] if not df.empty and "src_ip" in df.columns else pd.DataFrame()
             
+            safe_ip = html.escape(str(lookup_ip))
+            safe_city = html.escape(str(loc.get('city', '')))
+            safe_country = html.escape(str(loc.get('country', '')))
+            safe_isp = html.escape(str(loc.get('isp', '')))
+
             st.markdown(f"""
                 <div class="soc-panel" style="margin-top: 14px;">
                     <div style="font-size: 0.9rem; font-weight: 700; color: #58A6FF; font-family:'JetBrains Mono'; margin-bottom: 6px;">
-                        TARGET IP: {lookup_ip}
+                        TARGET IP: {safe_ip}
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 4px;">
-                        <b>Geolocation:</b> {loc['city']}, {loc['country']} | <b>ISP:</b> {loc['isp']}
+                        <b>Geolocation:</b> {safe_city}, {safe_country} | <b>ISP:</b> {safe_isp}
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 4px;">
                         <b>Correlated Log Records:</b> <span style="font-family:'JetBrains Mono'; color:#E6EDF3;">{len(ip_logs)} events</span>
