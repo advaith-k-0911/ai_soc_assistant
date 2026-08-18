@@ -2,6 +2,7 @@
 Hero AI Incident Investigation Console & Grounded RAG Chat Component
 """
 
+import html
 import streamlit as st
 import pandas as pd
 from components.styles import get_severity_badge_html
@@ -27,39 +28,47 @@ def render_ai_console(ai_assistant, logs_df: pd.DataFrame):
         if selected_alert and report:
             badge_html = get_severity_badge_html(selected_alert.get("severity", "High"))
 
+            safe_alert_id = html.escape(str(selected_alert.get('alert_id', '')))
+            safe_confidence_score = html.escape(str(report.get('confidence_score', 90)))
+            safe_exec_summary = html.escape(str(report.get('executive_summary', 'Analysis pending.')))
+            safe_evidence = html.escape(str(report.get('evidence', '')))
+            safe_reasoning = html.escape(str(report.get('reasoning', '')))
+            safe_mitre_mapping = html.escape(str(report.get('mitre_mapping', '')))
+            safe_recommendations = html.escape(str(report.get('recommendations', '')))
+
             st.markdown(f"""
                 <div class="soc-panel" style="border-color: #30363D;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
                         <div style="font-size: 1rem; font-weight: 700; color: #58A6FF;">
-                            AI INCIDENT REPORT &bull; {selected_alert['alert_id']}
+                            AI INCIDENT REPORT &bull; {safe_alert_id}
                         </div>
                         {badge_html}
                     </div>
                     <div style="font-size: 0.76rem; color: #8B949E; margin-bottom: 14px; font-family: 'JetBrains Mono';">
-                        Log-Grounded Correlation | Confidence Score: <b>{report.get('confidence_score', 90)}%</b>
+                        Log-Grounded Correlation | Confidence Score: <b>{safe_confidence_score}%</b>
                     </div>
                     <hr style="border-color:#21262D; margin-bottom: 12px;"/>
 
                     <div style="font-size:0.78rem; font-weight:600; color:#3FB950; text-transform:uppercase; margin-bottom:4px;">1. EXECUTIVE SUMMARY</div>
                     <div style="font-size:0.85rem; color:#E6EDF3; margin-bottom:14px; line-height:1.4;">
-                        {report.get('executive_summary', 'Analysis pending.')}
+                        {safe_exec_summary}
                     </div>
 
                     <div style="font-size:0.78rem; font-weight:600; color:#58A6FF; text-transform:uppercase; margin-bottom:4px;">2. CORRELATED LOG EVIDENCE</div>
-                    <pre style="background:#0D1117; border:1px solid #21262D; padding:10px; border-radius:4px; font-size:0.78rem; color:#8B949E; white-space:pre-wrap; margin-bottom:14px;">{report.get('evidence', '')}</pre>
+                    <pre style="background:#0D1117; border:1px solid #21262D; padding:10px; border-radius:4px; font-size:0.78rem; color:#8B949E; white-space:pre-wrap; margin-bottom:14px;">{safe_evidence}</pre>
 
                     <div style="font-size:0.78rem; font-weight:600; color:#D29922; text-transform:uppercase; margin-bottom:4px;">3. TECHNICAL REASONING & ROOT CAUSE</div>
                     <div style="font-size:0.85rem; color:#E6EDF3; margin-bottom:14px; line-height:1.4;">
-                        {report.get('reasoning', '')}
+                        {safe_reasoning}
                     </div>
 
                     <div style="font-size:0.78rem; font-weight:600; color:#BC8CFF; text-transform:uppercase; margin-bottom:4px;">4. MITRE ATT&CK ALIGNMENT</div>
                     <div style="font-size:0.85rem; color:#58A6FF; font-weight:600; margin-bottom:14px;">
-                        {report.get('mitre_mapping', '')}
+                        {safe_mitre_mapping}
                     </div>
 
                     <div style="font-size:0.78rem; font-weight:600; color:#3FB950; text-transform:uppercase; margin-bottom:4px;">5. RECOMMENDED PLAYBOOK REMEDIATION</div>
-                    <pre style="background:#0D1117; border:1px solid #21262D; padding:10px; border-radius:4px; font-size:0.78rem; color:#3FB950; white-space:pre-wrap; margin-bottom:14px;">{report.get('recommendations', '')}</pre>
+                    <pre style="background:#0D1117; border:1px solid #21262D; padding:10px; border-radius:4px; font-size:0.78rem; color:#3FB950; white-space:pre-wrap; margin-bottom:14px;">{safe_recommendations}</pre>
                 </div>
             """, unsafe_allow_html=True)
 
@@ -91,19 +100,19 @@ def render_ai_console(ai_assistant, logs_df: pd.DataFrame):
         with chat_container:
             for message in st.session_state.chat_history:
                 role = message["role"]
-                content = message["content"]
+                safe_content = html.escape(str(message["content"]))
                 if role == "user":
                     st.markdown(f"""
                         <div style="background:#161B22; border:1px solid #30363D; border-radius:4px; padding:8px 12px; margin-bottom:8px;">
                             <div style="font-size:0.75rem; font-weight:600; color:#58A6FF; text-transform:uppercase;">USER ANALYST</div>
-                            <div style="font-size:0.83rem; color:#E6EDF3;">{content}</div>
+                            <div style="font-size:0.83rem; color:#E6EDF3;">{safe_content}</div>
                         </div>
                     """, unsafe_allow_html=True)
                 else:
                     st.markdown(f"""
                         <div style="background:#0D1117; border:1px solid #3FB950; border-radius:4px; padding:8px 12px; margin-bottom:8px;">
                             <div style="font-size:0.75rem; font-weight:600; color:#3FB950; text-transform:uppercase;">AI SOC ENGINE</div>
-                            <div style="font-size:0.83rem; color:#E6EDF3; line-height:1.4;">{content}</div>
+                            <div style="font-size:0.83rem; color:#E6EDF3; line-height:1.4;">{safe_content}</div>
                         </div>
                     """, unsafe_allow_html=True)
 

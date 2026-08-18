@@ -1,0 +1,4 @@
+## 2024-05-18 - [CRITICAL] Streamlit HTML Injection (XSS) via `unsafe_allow_html=True`
+**Vulnerability:** Found multiple instances of Unescaped User Input / Stored XSS vulnerability in the Streamlit application UI layer due to insecure string formatting inside `st.markdown(unsafe_allow_html=True)`. Variables derived from logs (such as usernames, IPs, event descriptions) and model-generated reports were rendered directly as HTML.
+**Learning:** `unsafe_allow_html=True` disables Streamlit's built-in XSS protections. Passing dynamic strings, especially from unverified data sources (like log files, chat history, or APIs) straight into HTML blocks creates a pathway for arbitrary script execution or visual spoofing on the client.
+**Prevention:** Always sanitize dynamic strings inserted into HTML using `html.escape()` when `unsafe_allow_html=True` is utilized. Keep the data layer pure, and only escape values exactly when they are passed into the UI template strings.
