@@ -3,6 +3,7 @@ Correlated Threat Matrix & Incident Drawer Component
 """
 
 import pandas as pd
+import html
 import streamlit as st
 from components.styles import get_severity_badge_html
 
@@ -31,16 +32,16 @@ def render_threat_matrix(alerts: list, ai_assistant, logs_df: pd.DataFrame):
             with st.expander(f"[{alert['alert_id']}] {alert['title']} — ({sev.upper()})", expanded=(idx == 0)):
                 st.markdown(f"""
                     <div style="font-size: 0.82rem; margin-bottom: 8px;">
-                        <b>Severity:</b> {badge_html} | <b>Confidence:</b> <span style="color:#58A6FF; font-family:'JetBrains Mono';">{alert['confidence']}%</span>
+                        <b>Severity:</b> {badge_html} | <b>Confidence:</b> <span style="color:#58A6FF; font-family:'JetBrains Mono';">{html.escape(str(alert['confidence']))}%</span>
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;">
-                        Source IP: <span style="color:#58A6FF;">{alert['src_ip']}</span> | User: <span>{alert['username']}</span> | Asset: {alert['affected_asset']}
+                        Source IP: <span style="color:#58A6FF;">{html.escape(str(alert['src_ip']))}</span> | User: <span>{html.escape(str(alert['username']))}</span> | Asset: {html.escape(str(alert['affected_asset']))}
                     </div>
                     <div style="font-size: 0.8rem; color: #C9D1D9; margin-bottom: 8px;">
-                        <b>MITRE ATT&CK:</b> {alert['mitre_id']} - <i>{alert['mitre_name']}</i> ({alert['tactic']})
+                        <b>MITRE ATT&CK:</b> {html.escape(str(alert['mitre_id']))} - <i>{html.escape(str(alert['mitre_name']))}</i> ({html.escape(str(alert['tactic']))})
                     </div>
                     <div style="font-size: 0.78rem; color: #8B949E; margin-bottom: 12px;">
-                        {alert['description']}
+                        {html.escape(str(alert['description']))}
                     </div>
                 """, unsafe_allow_html=True)
 
@@ -58,30 +59,30 @@ def render_threat_matrix(alerts: list, ai_assistant, logs_df: pd.DataFrame):
             st.markdown(f"""
                 <div class="soc-panel">
                     <div style="font-size: 0.95rem; font-weight: 700; color: #F0F6FC; margin-bottom: 6px;">
-                        {selected['title']}
+                        {html.escape(str(selected['title']))}
                     </div>
                     <div style="margin-bottom: 12px;">
                         {badge_html}
                         <span style="font-size: 0.75rem; color: #8B949E; margin-left: 8px; font-family:'JetBrains Mono';">
-                            ID: {selected['alert_id']} | Confidence: {selected['confidence']}%
+                            ID: {html.escape(str(selected['alert_id']))} | Confidence: {html.escape(str(selected['confidence']))}%
                         </span>
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 4px;">
-                        <b>Source IP:</b> <span style="font-family:'JetBrains Mono'; color:#58A6FF;">{selected['src_ip']}</span>
+                        <b>Source IP:</b> <span style="font-family:'JetBrains Mono'; color:#58A6FF;">{html.escape(str(selected['src_ip']))}</span>
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 4px;">
-                        <b>Target Account:</b> {selected['username']}
+                        <b>Target Account:</b> {html.escape(str(selected['username']))}
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 4px;">
-                        <b>Destination Asset:</b> {selected['affected_asset']}
+                        <b>Destination Asset:</b> {html.escape(str(selected['affected_asset']))}
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 12px;">
-                        <b>MITRE Technique:</b> {selected['mitre_id']} ({selected['mitre_name']})
+                        <b>MITRE Technique:</b> {html.escape(str(selected['mitre_id']))} ({html.escape(str(selected['mitre_name']))})
                     </div>
                     <hr style="border-color:#21262D; margin: 10px 0;"/>
                     <div style="font-size: 0.78rem; font-weight: 600; color: #3FB950; text-transform: uppercase; margin-bottom: 4px;">RECOMMENDED MITIGATION</div>
                     <div style="font-size: 0.8rem; color: #C9D1D9;">
-                        {selected['recommendation']}
+                        {html.escape(str(selected['recommendation']))}
                     </div>
                 </div>
             """, unsafe_allow_html=True)

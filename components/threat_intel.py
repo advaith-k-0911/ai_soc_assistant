@@ -3,6 +3,7 @@ Threat Intelligence & MITRE ATT&CK Framework Component
 """
 
 import pandas as pd
+import html
 import streamlit as st
 from config import MITRE_ATTACK_DB
 from utils import get_ip_location
@@ -29,10 +30,10 @@ def render_threat_intel(df: pd.DataFrame):
             st.markdown(f"""
                 <div class="soc-panel" style="margin-top: 14px;">
                     <div style="font-size: 0.9rem; font-weight: 700; color: #58A6FF; font-family:'JetBrains Mono'; margin-bottom: 6px;">
-                        TARGET IP: {lookup_ip}
+                        TARGET IP: {html.escape(str(lookup_ip))}
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 4px;">
-                        <b>Geolocation:</b> {loc['city']}, {loc['country']} | <b>ISP:</b> {loc['isp']}
+                        <b>Geolocation:</b> {html.escape(str(loc['city']))}, {html.escape(str(loc['country']))} | <b>ISP:</b> {html.escape(str(loc['isp']))}
                     </div>
                     <div style="font-size: 0.8rem; color: #8B949E; margin-bottom: 4px;">
                         <b>Correlated Log Records:</b> <span style="font-family:'JetBrains Mono'; color:#E6EDF3;">{len(ip_logs)} events</span>
