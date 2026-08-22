@@ -5,6 +5,7 @@ Enterprise SOC Dashboard Component (Microsoft Sentinel / CrowdStrike Style)
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import html
 from datetime import datetime
 from components.styles import apply_plotly_enterprise_theme, get_severity_badge_html
 from config import MITRE_ATTACK_DB
@@ -234,20 +235,21 @@ def render_dashboard(df: pd.DataFrame, alerts: list, is_demo: bool):
 
         if display_alerts:
             for alert in display_alerts[:5]:
-                sev_cls = alert.get("severity", "Low").lower()
-                badge_html = get_severity_badge_html(alert.get("severity", "Low"))
+                safe_alert = {k: html.escape(str(v)) if isinstance(v, str) else v for k, v in alert.items()}
+                sev_cls = safe_alert.get("severity", "Low").lower()
+                badge_html = get_severity_badge_html(safe_alert.get("severity", "Low"))
                 
                 feed_item_html = f"""
                 <div class="threat-item {sev_cls}">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-                        <span style="font-size:0.85rem; font-weight:600; color:#F0F6FC;">{alert['title']}</span>
+                        <span style="font-size:0.85rem; font-weight:600; color:#F0F6FC;">{safe_alert['title']}</span>
                         {badge_html}
                     </div>
                     <div style="font-size:0.78rem; color:#8B949E; font-family:'JetBrains Mono', monospace;">
-                        Src IP: <span style="color:#58A6FF;">{alert['src_ip']}</span> | Account: <span style="color:#E6EDF3;">{alert['username']}</span> | Target: {alert['affected_asset']}
+                        Src IP: <span style="color:#58A6FF;">{safe_alert['src_ip']}</span> | Account: <span style="color:#E6EDF3;">{safe_alert['username']}</span> | Target: {safe_alert['affected_asset']}
                     </div>
                     <div style="font-size:0.75rem; color:#6E7681; margin-top:2px;">
-                        Timestamp: {alert['timestamp']} | MITRE: <b>{alert['mitre_id']}</b> ({alert['mitre_name']}) | Confidence: {alert['confidence']}%
+                        Timestamp: {safe_alert['timestamp']} | MITRE: <b>{safe_alert['mitre_id']}</b> ({safe_alert['mitre_name']}) | Confidence: {safe_alert['confidence']}%
                     </div>
                 </div>
                 """
