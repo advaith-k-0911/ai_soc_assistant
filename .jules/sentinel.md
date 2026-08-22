@@ -1,0 +1,4 @@
+## 2026-08-15 - Streamlit Unsafe HTML Interpolation XSS
+**Vulnerability:** The application was vulnerable to Cross-Site Scripting (XSS) because it interpolated user-controlled data (like log values and search queries) directly into Python f-strings which were then passed to Streamlit's `st.markdown(..., unsafe_allow_html=True)`.
+**Learning:** Even when using higher-level frameworks like Streamlit, bypassing standard rendering with `unsafe_allow_html=True` to create custom UI components removes built-in XSS protections. Streamlit does not automatically sanitize data within these raw HTML blocks.
+**Prevention:** Always use `html.escape()` around any dynamic variable, especially user-controlled or external data, before interpolating it into a string that will be passed to `unsafe_allow_html=True`.
